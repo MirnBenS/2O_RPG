@@ -26,9 +26,9 @@ void Player::doAttack(Character *target) {
 
 void Player::takeDamage(int damage) {
     setHealth(health - damage);
-    cout << "You have taken " << damage << " damage" << endl;
+    cout << " > You have taken " << damage << " damage" << endl;
     if (health <= 0) {
-        cout << "You have died :(" << endl;
+        cout << " > You have died :(" << endl;
     }
 }
 
@@ -41,7 +41,7 @@ void Player::flee(vector<Enemy *> enemies) {
     } else {
         srand(time(NULL));
         int chance = rand() % 100;
-        cout << "chance: " << chance << endl;
+        cout << " > chance: " << chance << endl;
         fleed = chance > 99;
     }
 
@@ -65,10 +65,11 @@ void Player::gainExperience(int exp) {
 }
 
 Character *Player::getTarget(vector<Enemy *> enemies) {
-    cout << " Choose a target:" << endl;
+    cout << "\n ------------------------" << endl;
+    cout << "   Choose a target:" << endl;
     int targetIndex = 0;
     for (int i = 0; i < enemies.size(); i++) {
-        cout << i << ". " << enemies[i]->getName() << endl;
+        cout << "   " << i << ". " << enemies[i]->getName() << endl;
     }
     cin >> targetIndex;
     return enemies[targetIndex];
@@ -76,9 +77,10 @@ Character *Player::getTarget(vector<Enemy *> enemies) {
 
 Action Player::takeAction(vector<Enemy *> enemies) {
     int option = 0;
-    cout << " Choose an action:" << endl;
-    cout << "  1. Attack" << endl;
-    cout << "  2. Flee\n  > " << endl;
+    cout << "\n ------------------------" << endl;
+    cout << "   Choose an action:" << endl;
+    cout << "   1. Attack" << endl;
+    cout << "   2. Flee" << endl;
     cin >>option;
     Character *target = nullptr;
 
@@ -101,7 +103,7 @@ Action Player::takeAction(vector<Enemy *> enemies) {
             };
             break;
         default:
-            cout << "Invalid option" << endl;
+            cout << "   /Invalid option/" << endl;//Aún imprime daño después
             break;
     }
 

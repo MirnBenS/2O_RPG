@@ -59,7 +59,7 @@ void Combat::doCombat() {
         cout<<" You have won the combat!"<<endl;
     }
     else {
-        cout<<" The enemies have won the combat\n-----Game Over-----"<<endl;
+        cout<<" The enemies have won the combat\n  --------Game Over--------"<<endl;
     }
 }
 
