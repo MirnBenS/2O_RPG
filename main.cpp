@@ -7,7 +7,7 @@
 using namespace std;
 
 int main() {
-    Player *player = new Player("Luke", 4, 7, 2, 10);
+    Player *player = new Player("Luke", 60, 7, 2, 10);
     Enemy *enemy = new Enemy(" Jabba", 20, 5, 3, 7);
     Enemy *enemy2 = new Enemy(" Palpatine", 30, 8, 5, 2);
 
