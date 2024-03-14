@@ -1,7 +1,6 @@
 //
 // Created by PC on 3/13/2024.
 //
-
 #ifndef INC_2O_RPG_CHARACTER_H
 #define INC_2O_RPG_CHARACTER_H
 #include <string>
@@ -17,7 +16,7 @@ protected:
     int defense;
     int speed;
     bool isPlayer;
-    bool hasFleed;
+    bool fleed;
 
 public:
     Character(string, int, int, int, int, bool);
@@ -37,7 +36,7 @@ public:
     int getSpeed();
     string toString();
     bool getIsPlayer();
-
+    bool hasFleed();
 };
 
 #endif //INC_2O_RPG_CHARACTER_H

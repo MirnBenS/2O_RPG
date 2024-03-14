@@ -12,14 +12,12 @@ struct Action;
 class Player;
 
 class Enemy: public Character {
-    public
+public:
     Enemy(string, int, int, int, int);
     void doAttack(Character *target) override;
-    void takeDamage(int dmaage) override;
+    void takeDamage(int damage) override;
     Character* getTarget(vector<Player*> teamMembers);
     Action takeAction(vector<Player*> player);
-
 };
-
 
 #endif //INC_2O_RPG_ENEMY_H

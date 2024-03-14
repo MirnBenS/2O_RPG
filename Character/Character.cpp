@@ -11,25 +11,26 @@ Character::Character(string _name, int _health, int _attack, int _defense, int _
     defense = _defense;
     speed = _speed;
     isPlayer = _isPlayer;
+    fleed = false;
 }
 
-void Character::setName(string _name){
+void Character::setName(string _name) {
     name = _name;
 }
 
-string Character::getName(){
+string Character::getName() {
     return name;
 }
 
-void Character::setHealth(int _health){
+void Character::setHealth(int _health) {
     health = _health;
 }
 
-int Character::getHealth(){
+int Character::getHealth() {
     return health;
 }
 
-void Character::setAttack(int _attack){
+void Character::setAttack(int _attack) {
     attack = _attack;
 }
 
@@ -37,26 +38,30 @@ int Character::getAttack() {
     return attack;
 }
 
-void Character::setDefense(int _defense){
+void Character::setDefense(int _defense) {
     defense = _defense;
 }
 
-int Character::getDefense(){
+int Character::getDefense() {
     return defense;
 }
 
-void Character::setSpeed(int _speed){
+void Character::setSpeed(int _speed) {
     speed = _speed;
 }
 
-int Character::getSpeed(){
+int Character::getSpeed() {
     return speed;
 }
 
-string Character::toString(){
-    return "Name: " + name + "\nHealth: "+ to_string(health) + "\nAttack: " + to_string(attack) + "\nDefense: " + to_string(defense) + "\nSpeed: "+ to_string(speed);
+string Character::toString() {
+    return "Name: " + name + "\nHealth: " + to_string(health) + "\nAttack: " + to_string(attack) + "\nDefense: " + to_string(defense) + "\nSpeed: " + to_string(speed);
 }
 
-bool Character::getIsPlayer(){
+bool Character::getIsPlayer() {
     return isPlayer;
+}
+
+bool Character::hasFleed() {
+    return fleed;
 }
