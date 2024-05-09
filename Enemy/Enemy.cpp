@@ -5,7 +5,6 @@
 #include "Enemy.h"
 #include <iostream>
 
-
 using namespace std;
 
 int getRolledAttack(int attack) {
@@ -13,7 +12,7 @@ int getRolledAttack(int attack) {
     return (rand() % (attack - lowerLimit)) + lowerLimit;
 }
 
-Enemy::Enemy(string name, int health, int attack, int defense, int speed) : Character(name, health, attack, defense, speed, false) {
+Enemy::Enemy(char* name, int health, int attack, int defense, int speed) : Character(name, health, attack, defense, speed, false) {
 }
 
 void Enemy::doAttack(Character *target) {
@@ -32,7 +31,8 @@ void Enemy::takeDamage(int damage) {
     }
 }
 
-Character* Enemy::getTarget(vector<Player *> teamMembers) {// Quien tiene menos vida
+Character* Enemy::getTarget(vector<Player *> teamMembers) {
+    //Quien tiene menos vida
     int targetIndex = 0;
     int lowestHealth = INT_MAX;
     for(int i=0; i < teamMembers.size(); i++) {
@@ -49,6 +49,7 @@ Action Enemy::takeAction(vector<Player *> player) {
     Action myAction;
     myAction.speed = getSpeed();
     myAction.subscriber = this;
+
     Character* target = getTarget(player);
     myAction.target = target;
     myAction.action = [this, target]() {

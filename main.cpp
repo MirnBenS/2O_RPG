@@ -19,6 +19,7 @@ int main() {
     Combat* combat = new Combat(participants);
     combat->doCombat();
 
+
     delete player;
     delete enemy;
     delete enemy2;

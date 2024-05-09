@@ -17,11 +17,9 @@ using namespace std;
 
 class Combat {
 private:
-    //Realmente sigo necesitando este vector?
     vector<Character*> participants;
     vector<Player*> teamMembers;
     vector<Enemy*> enemies;
-    //Priority queue de acciones
     priority_queue<Action> actions;
 
     void prepareCombat();

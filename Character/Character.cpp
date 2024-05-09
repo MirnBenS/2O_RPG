@@ -1,24 +1,27 @@
 //
 // Created by PC on 3/13/2024.
 //
-
 #include "Character.h"
+#include <cstring>
+#include <sstream>
+#include <iostream>
 
-Character::Character(string _name, int _health, int _attack, int _defense, int _speed, bool _isPlayer) {
-    name = _name;
+Character::Character(char* _name, int _health, int _attack, int _defense, int _speed, bool _isPlayer) {
+    strcpy(name,_name);
     health = _health;
     attack = _attack;
     defense = _defense;
     speed = _speed;
     isPlayer = _isPlayer;
     fleed = false;
+    max_health=1;
 }
 
-void Character::setName(string _name) {
-    name = _name;
+void Character::setName(char* _name) {
+    strcpy (name, _name);
 }
 
-string Character::getName() {
+char* Character::getName() {
     return name;
 }
 
@@ -55,7 +58,7 @@ int Character::getSpeed() {
 }
 
 string Character::toString() {
-    return "Name: " + name + "\nHealth: " + to_string(health) + "\nAttack: " + to_string(attack) + "\nDefense: " + to_string(defense) + "\nSpeed: " + to_string(speed);
+    return "Name: " + string(name) + "\nHealth: " + to_string(health) + "\nAttack: " + to_string(attack) + "\nDefense: " + to_string(defense) + "\nSpeed: " + to_string(speed);
 }
 
 bool Character::getIsPlayer() {

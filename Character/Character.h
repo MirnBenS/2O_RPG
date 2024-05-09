@@ -4,28 +4,30 @@
 #ifndef INC_2O_RPG_CHARACTER_H
 #define INC_2O_RPG_CHARACTER_H
 #include <string>
+#include <vector>
 #include "../Combat/Action.h"
 
 using namespace std;
 
 class Character {
 protected:
-    string name;
+    char name[30];
     int health;
     int attack;
     int defense;
     int speed;
     bool isPlayer;
     bool fleed;
+    //int max_health;
 
 public:
-    Character(string, int, int, int, int, bool);
+    Character(char*, int, int, int, int, bool);
 
     virtual void doAttack(Character *target) = 0;
     virtual void takeDamage(int damage) = 0;
 
-    void setName(string);
-    string getName();
+    void setName(char*);
+    char* getName();
     void setHealth(int);
     int getHealth();
     void setAttack(int);
