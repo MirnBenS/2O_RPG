@@ -14,7 +14,8 @@ Character::Character(char* _name, int _health, int _attack, int _defense, int _s
     speed = _speed;
     isPlayer = _isPlayer;
     fleed = false;
-    max_health=1;
+    //experience =_experience;
+    //level= _level;
 }
 
 void Character::setName(char* _name) {
@@ -68,3 +69,13 @@ bool Character::getIsPlayer() {
 bool Character::hasFleed() {
     return fleed;
 }
+
+/*
+ * int Character::getExperience(){
+ *  return experience;
+ * }
+ *
+ * int Character::getLevel(){
+ *  return level;
+ * }
+ */

@@ -18,6 +18,8 @@ protected:
     int speed;
     bool isPlayer;
     bool fleed;
+    //int experience;
+    //int level;
     //int max_health;
 
 public:
@@ -26,7 +28,7 @@ public:
     virtual void doAttack(Character *target) = 0;
     virtual void takeDamage(int damage) = 0;
 
-    void setName(char*);
+    void setName(char[30]);
     char* getName();
     void setHealth(int);
     int getHealth();

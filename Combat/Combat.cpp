@@ -54,12 +54,13 @@ void Combat::doCombat() {
         registerActions();
         executeActions();
     }
-
+    //WHO WIN?
     if(enemies.size() == 0) {
-        cout<<" The enemies have won the combat\n  --------Game Over--------"<<endl;
+        cout<<" You have won the combat!"<<endl;
+        cout<<" This match... I think I've learned something from this. You're nothing."<<endl;
     }
     else {
-        cout<<" You have won the combat!"<<endl;
+        cout<<" The enemies have won the combat\n  --------Game Over--------"<<endl;
     }
 }
 

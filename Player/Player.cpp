@@ -5,9 +5,7 @@
 #include "Player.h"
 #include <iostream>
 #include "../Utils.h"
-#include <algorithm>
 #include <cstring>
-#include <vector>
 
 using namespace std;
 using namespace combat_utils;
@@ -30,6 +28,10 @@ void Player::doAttack(Character *target) {
     int rolledAttack = getRolledAttack(getAttack());
     int trueDamage = target->getDefense() > rolledAttack ? 0 : rolledAttack - target->getDefense();
     target->takeDamage(trueDamage);
+    if (target->getHealth()<=0){
+        cout << "You have slain"<< target->getName()<<"!"<< endl;
+        gainExperience(20);
+    }
 }
 
 void Player::takeDamage(int damage) {
@@ -48,7 +50,8 @@ void Player::flee(vector<Enemy *> enemies) {
     bool fleed = false;
     if (this->getSpeed() > fastestEnemy->getSpeed()) {
         fleed = true;
-    } else {
+    }
+    else {
         srand(time(NULL));
         int chance = rand() % 100;
         cout << " > chance: " << chance << endl;
@@ -66,15 +69,7 @@ void Player::levelUp() {
     setSpeed(getSpeed() + 5);
 }
 
-void Player::gainExperience(int exp) {
-    experience += exp;
-    if (experience >= 100) {
-        levelUp();
-        experience = 0;
-    }
-}
-
-Character *Player::getTarget(vector<Enemy *> enemies) {
+Character* Player::getTarget(vector<Enemy *> enemies) {
     cout << "\n ------------------------" << endl;
     cout << "   Choose a target:" << endl;
     int targetIndex = 0;
@@ -84,6 +79,29 @@ Character *Player::getTarget(vector<Enemy *> enemies) {
     cin >> targetIndex;
     return enemies[targetIndex];
 }
+
+
+void Player::gainExperience(int exp) {
+    experience += exp;
+    if (experience >= 100) {
+        levelUp();
+        experience = 0;
+    }
+}
+/*
+ void Player::gainExperience(int exp) {
+    if (enemy && enemy -> health <= 0){
+    experience += enemy -> experience;
+    cout << "You have gained " << enemy->experience<<"experience"<<endl;
+    }
+}
+ void Player::LevelUp(){
+    while(experience >=0){
+    level++;
+    experience-=100;
+    }
+ }
+*/
 
 Action Player::takeAction(vector<Enemy *> enemies) {
     int option = 0;
@@ -112,7 +130,10 @@ Action Player::takeAction(vector<Enemy *> enemies) {
             };
             break;
         default:
-            cout << "   /Invalid option/" << endl;  //Aún imprime daño después
+            cout << "   /Invalid option/" << endl;  // what():  bad_function_call
+            myAction.action = [](){
+                cout << "   Please choose a valid option.";
+            };
             break;
     }
 
