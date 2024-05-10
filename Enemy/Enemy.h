@@ -13,7 +13,8 @@ class Player;
 
 class Enemy: public Character {
 public:
-    Enemy(char*, int, int, int, int);
+    int Max_Health;
+    Enemy(char*, int, int, int, int, int, int );
     void doAttack(Character *target) override;
     void takeDamage(int damage) override;
     Character* getTarget(vector<Player*> teamMembers);

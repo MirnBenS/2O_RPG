@@ -9,11 +9,14 @@
 #include "../Player/Player.h"
 #include "../Enemy/Enemy.h"
 #include "Action.h"
+#include <Combat.h>
 #include <vector>
 #include <string>
 #include <queue>
 
 using namespace std;
+class Enemy;
+class Player;
 
 class Combat {
 private:

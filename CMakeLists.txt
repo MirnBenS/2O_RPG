@@ -8,7 +8,8 @@ include_directories(Combat)
 include_directories(Enemy)
 include_directories(Player)
 
-add_executable(2O_RPG main.cpp
+add_executable(2O_RPG
+        main.cpp
         Character/Character.cpp
         Character/Character.h
         Enemy/Enemy.cpp

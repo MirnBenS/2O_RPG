@@ -58,6 +58,14 @@ void Combat::doCombat() {
     if(enemies.size() == 0) {
         cout<<" You have won the combat!"<<endl;
         cout<<" This match... I think I've learned something from this. You're nothing."<<endl;
+        for (Enemy* enemy : enemies){
+            if (enemy->health<=0){
+                cout<<"Enemy had won "<< enemy-> experience << "of experience."<<endl;
+            }
+        }
+        for (Player* player : teamMembers){
+            cout<< player->getName()<<"has won"<<player->experience <<"of experience."<<endl;
+        }
     }
     else {
         cout<<" The enemies have won the combat\n  --------Game Over--------"<<endl;
@@ -113,7 +121,7 @@ void Combat::checkForFlee(Character *character) {
             //character->hasDied()
         }
         else {
-            cout<<character->getName()<<" has fled the combat"<<endl;
+            cout<<" "<<character->getName()<<" has fled the combat"<<endl;
             enemies.erase(remove(enemies.begin(), enemies.end(), character), enemies.end());
         }
         participants.erase(remove(participants.begin(), participants.end(), character), participants.end());

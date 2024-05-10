@@ -3,10 +3,8 @@
 //
 #include "Character.h"
 #include <cstring>
-#include <sstream>
-#include <iostream>
 
-Character::Character(char* _name, int _health, int _attack, int _defense, int _speed, bool _isPlayer) {
+Character::Character(char* _name, int _health, int _attack, int _defense, int _speed, bool _isPlayer, int _experience, int _level) {
     strcpy(name,_name);
     health = _health;
     attack = _attack;
@@ -14,8 +12,8 @@ Character::Character(char* _name, int _health, int _attack, int _defense, int _s
     speed = _speed;
     isPlayer = _isPlayer;
     fleed = false;
-    //experience =_experience;
-    //level= _level;
+    experience =_experience;
+    level= _level;
 }
 
 void Character::setName(char* _name) {
@@ -70,12 +68,11 @@ bool Character::hasFleed() {
     return fleed;
 }
 
-/*
- * int Character::getExperience(){
- *  return experience;
- * }
- *
- * int Character::getLevel(){
- *  return level;
- * }
- */
+
+int Character::getExperience(){
+    return experience;
+}
+
+int Character::getLevel(){
+    return level;
+}

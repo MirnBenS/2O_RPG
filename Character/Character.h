@@ -12,18 +12,17 @@ using namespace std;
 class Character {
 protected:
     char name[30];
-    int health;
     int attack;
     int defense;
     int speed;
     bool isPlayer;
     bool fleed;
-    //int experience;
-    //int level;
-    //int max_health;
+public:
+    int experience;
+    int level;
 
 public:
-    Character(char*, int, int, int, int, bool);
+    Character(char[30], int, int, int, int, bool, int, int);
 
     virtual void doAttack(Character *target) = 0;
     virtual void takeDamage(int damage) = 0;
@@ -41,6 +40,10 @@ public:
     string toString();
     bool getIsPlayer();
     bool hasFleed();
+    int getExperience();
+    int getLevel();
+    int health;
+
 };
 
 #endif //INC_2O_RPG_CHARACTER_H

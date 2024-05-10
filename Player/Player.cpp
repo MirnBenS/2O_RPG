@@ -5,6 +5,7 @@
 #include "Player.h"
 #include <iostream>
 #include "../Utils.h"
+#include "Combat.h"
 #include <cstring>
 
 using namespace std;
@@ -14,33 +15,29 @@ bool compareSpeed(Enemy *a, Enemy *b) {
     return a->getSpeed() > b->getSpeed();
 }
 
-Player::Player(char name[30], int health, int attack, int defense, int speed) : Character(name, health, attack, defense,speed, true) {
-    experience = 0;
-    level = 1;
+Player::Player(char name[30], int health, int attack, int defense, int speed, int experience, int level) : Character(name, health, attack, defense, speed, true, experience, level) {
+    experience = 75;
+    level = 4;
 }
-Player::Player(char* _name, int _health, int _attack, int _defense, int _speed, bool _isPlayer, int _experience, int _level): Character(_name, _health, _attack, _defense,
-                                                                                                                                        _speed, _isPlayer) {
-    experience = _experience;
-    level = _level;
-}
+
+
+
 
 void Player::doAttack(Character *target) {
     int rolledAttack = getRolledAttack(getAttack());
     int trueDamage = target->getDefense() > rolledAttack ? 0 : rolledAttack - target->getDefense();
     target->takeDamage(trueDamage);
     if (target->getHealth()<=0){
-        cout << "You have slain"<< target->getName()<<"!"<< endl;
-        gainExperience(20);
+        cout << " > You have slain"<< target->getName()<<"!"<< endl;
     }
 }
 
 void Player::takeDamage(int damage) {
     setHealth(health - damage);
+    cout << " > You have taken " << damage << " damage" << endl;
     if (health <= 0) {
         cout << " > You have died :(" << endl;
-    }
-    else{
-        cout << " > You have taken " << damage << " damage" << endl;
+        cout << "  --------Game Over--------"<<endl;
     }
 }
 
@@ -55,18 +52,12 @@ void Player::flee(vector<Enemy *> enemies) {
         srand(time(NULL));
         int chance = rand() % 100;
         cout << " > chance: " << chance << endl;
-        fleed = chance > 99;
+        if (fleed = chance > 99){
+            fleed = true;
+        }
     }
 
     this->fleed = fleed;
-}
-
-void Player::levelUp() {
-    level++;
-    setHealth(getHealth() + 10);
-    setAttack(getAttack() + 5);
-    setDefense(getDefense() + 5);
-    setSpeed(getSpeed() + 5);
 }
 
 Character* Player::getTarget(vector<Enemy *> enemies) {
@@ -80,28 +71,25 @@ Character* Player::getTarget(vector<Enemy *> enemies) {
     return enemies[targetIndex];
 }
 
+void Player::gainExperience(Enemy* enemy) {
+    if (enemy && enemy->health <=0){
+        experience+= enemy->experience;
+        LevelUp();
+    }
+}
 
-void Player::gainExperience(int exp) {
-    experience += exp;
-    if (experience >= 100) {
-        levelUp();
-        experience = 0;
+void Player::LevelUp() {
+    while (experience>=100){
+        level++;
+        experience-=100;
+
+        setHealth(getHealth() + 10);
+        setAttack(getAttack() + 5);
+        setDefense(getDefense() + 5);
+        setSpeed(getSpeed() + 5);
     }
+
 }
-/*
- void Player::gainExperience(int exp) {
-    if (enemy && enemy -> health <= 0){
-    experience += enemy -> experience;
-    cout << "You have gained " << enemy->experience<<"experience"<<endl;
-    }
-}
- void Player::LevelUp(){
-    while(experience >=0){
-    level++;
-    experience-=100;
-    }
- }
-*/
 
 Action Player::takeAction(vector<Enemy *> enemies) {
     int option = 0;
@@ -139,7 +127,7 @@ Action Player::takeAction(vector<Enemy *> enemies) {
 
     return myAction;
 }
-
+/*
 char* Player::serialize(){
     char* iterator = buffer;
 
@@ -209,5 +197,4 @@ char* Player::serialize(){
 
         return new Player(_name,_health, _attack, _defense, _speed, _isPlayer, _experience, _level);
     }
-    
-
+*/
