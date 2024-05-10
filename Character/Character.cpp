@@ -16,7 +16,7 @@ Character::Character(char* _name, int _health, int _attack, int _defense, int _s
     level= _level;
 }
 
-void Character::setName(char* _name) {
+void Character::setName(char _name[30]) {
     strcpy (name, _name);
 }
 

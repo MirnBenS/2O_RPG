@@ -50,28 +50,48 @@ void Combat::prepareCombat() {
 void Combat::doCombat() {
     prepareCombat();
 
-    while(enemies.size() != 0 && teamMembers.size() != 0) {
+    while (enemies.size() != 0 && teamMembers.size() != 0) {
         registerActions();
         executeActions();
     }
     //WHO WIN?
-    if(enemies.size() == 0) {
-        cout<<"  You have won the combat!"<<endl;
-        cout<<"  This match... I think I've learned something from this. You're nothing."<<endl;
-        for (Enemy* enemy : enemies){
-            if (enemy->health<=0){
-                cout<<"  Enemy had won "<< enemy-> experience << "of experience."<<endl;
+    if (enemies.size() == 0) {
+        cout << "  You have won the combat!" << endl;
+        cout << "  This match... I think I've learned something from this. You're nothing." << endl;
+        for (Enemy *enemy: enemies) {
+            if (enemy->health <= 0) {
+                cout << "  Enemy had won " << enemy->experience << "of experience." << endl;
             }
         }
-        for (Player* player : teamMembers){
-            cout<<"  > "<<player->getName()<<" has won "<<player->experience <<" of experience."<<endl;
+        for (Player *player: teamMembers) {
+            cout << "  > " << player->getName() << " has won " << player->experience << " of experience." << endl;
+        }
+    } else {
+        cout << " The enemies have won the combat\n  --------Game Over--------" << endl;
+    }
+/*
+ * //BORRADOR?
+    //RECIEN AGREGADO
+    for (Player *player: teamMembers) {
+        cout << "Nivel avanzado. " << endl;
+        cout << player->health << endl;
+        cout << player->attack << endl;
+        cout << player->defense << endl;
+    }*/
+}
+/*
+    void Combat::increaseEnemyStats(int points) {
+        for (Enemy *enemy: enemies) {
+
+            int healthIncrease = points / 3;
+            int attackIncrease = points / 3;
+            int defenseIncrease = points - healthIncrease - attackIncrease;
+            enemy->health += healthIncrease;
+            enemy->attack += attackIncrease;
+            enemy->defense += defenseIncrease;
         }
     }
-    else {
-        cout<<" The enemies have won the combat\n  --------Game Over--------"<<endl;
-    }
-}
-
+*/
 void Combat::registerActions() {
     vector<Character*>::iterator participant = participants.begin();
     while(participant != participants.end()) {
@@ -121,7 +141,7 @@ void Combat::checkForFlee(Character *character) {
             //character->hasDied()
         }
         else {
-            cout<<" "<<character->getName()<<" has fled the combat"<<endl;
+            cout<<"  "<<character->getName()<<" has fled the combat"<<endl;
             enemies.erase(remove(enemies.begin(), enemies.end(), character), enemies.end());
         }
         participants.erase(remove(participants.begin(), participants.end(), character), participants.end());
