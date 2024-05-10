@@ -56,15 +56,15 @@ void Combat::doCombat() {
     }
     //WHO WIN?
     if(enemies.size() == 0) {
-        cout<<" You have won the combat!"<<endl;
-        cout<<" This match... I think I've learned something from this. You're nothing."<<endl;
+        cout<<"  You have won the combat!"<<endl;
+        cout<<"  This match... I think I've learned something from this. You're nothing."<<endl;
         for (Enemy* enemy : enemies){
             if (enemy->health<=0){
-                cout<<"Enemy had won "<< enemy-> experience << "of experience."<<endl;
+                cout<<"  Enemy had won "<< enemy-> experience << "of experience."<<endl;
             }
         }
         for (Player* player : teamMembers){
-            cout<< player->getName()<<"has won"<<player->experience <<"of experience."<<endl;
+            cout<<"  > "<<player->getName()<<" has won "<<player->experience <<" of experience."<<endl;
         }
     }
     else {

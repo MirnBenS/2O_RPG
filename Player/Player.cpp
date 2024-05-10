@@ -5,8 +5,7 @@
 #include "Player.h"
 #include <iostream>
 #include "../Utils.h"
-#include "Combat.h"
-#include <cstring>
+
 
 using namespace std;
 using namespace combat_utils;
@@ -28,7 +27,7 @@ void Player::doAttack(Character *target) {
     int trueDamage = target->getDefense() > rolledAttack ? 0 : rolledAttack - target->getDefense();
     target->takeDamage(trueDamage);
     if (target->getHealth()<=0){
-        cout << " > You have slain"<< target->getName()<<"!"<< endl;
+        cout << " > You have slain "<< target->getName()<<"!"<< endl;
     }
 }
 
@@ -52,9 +51,10 @@ void Player::flee(vector<Enemy *> enemies) {
         srand(time(NULL));
         int chance = rand() % 100;
         cout << " > chance: " << chance << endl;
-        if (fleed = chance > 99){
+        if (fleed != chance > 99){
             fleed = true;
         }
+
     }
 
     this->fleed = fleed;
