@@ -73,22 +73,22 @@ void Combat::doCombat() {
  * //BORRADOR?
     //RECIEN AGREGADO
     for (Player *player: teamMembers) {
-        cout << "Nivel avanzado. " << endl;
+        cout << "Level increase " << endl;
         cout << player->health << endl;
         cout << player->attack << endl;
         cout << player->defense << endl;
     }*/
 }
 /*
-    void Combat::increaseEnemyStats(int points) {
+    void Combat::increaseEnemyStats(int score) {
         for (Enemy *enemy: enemies) {
 
-            int healthIncrease = points / 3;
-            int attackIncrease = points / 3;
-            int defenseIncrease = points - healthIncrease - attackIncrease;
-            enemy->health += healthIncrease;
-            enemy->attack += attackIncrease;
-            enemy->defense += defenseIncrease;
+            int HealthIncrease = score / 3;
+            int AttackIncrease = score / 3;
+            int DefenseIncrease = score - HealthIncrease - AttackIncrease;
+            enemy->health += HealthIncrease;
+            enemy->attack += AttackIncrease;
+            enemy->defense += DefenseIncrease;
         }
     }
 */
