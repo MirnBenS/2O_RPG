@@ -34,7 +34,7 @@ void Player::takeDamage(int damage) {
     }
 }
 
-void Player::flee(vector<Enemy*> enemies) {
+void Player::flee(vector<Enemy*> enemies) { //SE ESCAPA SIEMPRE
     std::sort(enemies.begin(), enemies.end(), compareSpeed);
     Enemy *fastestEnemy = enemies[0];
     bool fleed = false;
@@ -45,7 +45,12 @@ void Player::flee(vector<Enemy*> enemies) {
         srand(time(NULL));
         int chance = rand() % 100;
         cout << " > chance: " << chance << endl;
-        fleed = chance > 99;
+        if (fleed = chance > 99){
+            fleed = true;
+        }
+        else{
+            cout << "Dont be a coward"<<endl;
+        }
 
     }
 
@@ -81,7 +86,7 @@ void Player::LevelUp() {
         health += healthGain;
         attack += attackGain;
         defense += defenseGain;
-
+        // no se imprime
         cout << "  You leveled up! -> " << level << "!" << endl;
         cout << "  ---Your characteristics are improved--- " << endl;
         cout << "  Attack: +" << 5 << endl;
