@@ -56,11 +56,11 @@ void Combat::doCombat() {
     }
     //WHO WIN?
     if (enemies.size() == 0) {
-        cout << "  You have won the combat!" << endl;
-        cout << "  This match... I think I've learned something from this. You're nothing." << endl;
+        cout << "   You have won the combat!" << endl;
+        cout << "   This match... I think I've learned something from this. You're nothing." << endl;
         for (Enemy *enemy: enemies) {
             if (enemy->health <= 0) {
-                cout << "  Enemy had won " << enemy->experience << "of experience." << endl;
+                cout << "  Enemy had " << enemy->experience << " of experience." << endl;
             }
         }
         for (Player *player: teamMembers) {
@@ -69,29 +69,29 @@ void Combat::doCombat() {
     } else {
         cout << " The enemies have won the combat\n  --------Game Over--------" << endl;
     }
-/*
- * //BORRADOR?
-    //RECIEN AGREGADO
-    for (Player *player: teamMembers) {
-        cout << "Level increase " << endl;
-        cout << player->health << endl;
-        cout << player->attack << endl;
-        cout << player->defense << endl;
-    }*/
-}
-/*
-    void Combat::increaseEnemyStats(int score) {
-        for (Enemy *enemy: enemies) {
 
-            int HealthIncrease = score / 3;
-            int AttackIncrease = score / 3;
-            int DefenseIncrease = score - HealthIncrease - AttackIncrease;
-            enemy->health += HealthIncrease;
-            enemy->attack += AttackIncrease;
-            enemy->defense += DefenseIncrease;
-        }
+    for (Player *player: teamMembers) {
+        cout << "\n-----LEVEL INCREASE----- " << endl;
+        cout << "  Health: " <<player->health << endl;
+        cout << "  Attack: " <<player->attack << endl;
+        cout << "  Defense: " <<player->defense << endl;
     }
-*/
+}
+
+void Combat::increaseEnemyStatus(int score) {
+    // DAR LOS PUNTOS A LOS ENEMIGOS
+    for (Enemy *enemy: enemies) {
+
+        // Aumentar atributos
+        int healthIncrease = score / 3;
+        int attackIncrease = score / 3;
+        int defenseIncrease = score - healthIncrease - attackIncrease;
+        enemy->health += healthIncrease;
+        enemy->attack += attackIncrease;
+        enemy->defense += defenseIncrease;
+    }
+}
+
 void Combat::registerActions() {
     vector<Character*>::iterator participant = participants.begin();
     while(participant != participants.end()) {
@@ -114,9 +114,16 @@ void Combat::executeActions() {
         Action currentAction = actions.top();
         currentAction.action();
         checkForFlee(currentAction.subscriber);
-        checkParticipantStatus(currentAction.subscriber);
-        checkParticipantStatus(currentAction.target);
-        actions.pop();
+        if (currentAction.target!= nullptr){
+            checkParticipantStatus(currentAction.subscriber);
+            checkParticipantStatus(currentAction.target);
+            actions.pop();
+        }
+        else{
+            while(!actions.empty()){
+                actions.pop();
+            }
+        }
     }
 }
 
@@ -133,20 +140,24 @@ void Combat::checkParticipantStatus(Character* participant) {
 }
 
 void Combat::checkForFlee(Character *character) {
+    if(character->getHealth()<=0) {
+        return;
+    }
     bool fleed = character->hasFleed();
-    if(fleed) {
-        if(character->getIsPlayer()) {
-            cout<<" You have fled the combat |COWARD|"<<endl;
+    if (fleed){
+        if (character->getIsPlayer()){
+            cout<<"  You have fled the combat |COWARD|"<<endl;
             teamMembers.erase(remove(teamMembers.begin(), teamMembers.end(), character), teamMembers.end());
-            //character->hasDied()
         }
-        else {
+        else
+        {
             cout<<"  "<<character->getName()<<" has fled the combat"<<endl;
             enemies.erase(remove(enemies.begin(), enemies.end(), character), enemies.end());
         }
         participants.erase(remove(participants.begin(), participants.end(), character), participants.end());
     }
 }
+
 
 string Combat::participantsToString() {
     string result = "";

@@ -15,10 +15,7 @@ bool compareSpeed(Enemy *a, Enemy *b) {
 }
 
 Player::Player(char name[30], int health, int attack, int defense, int speed, int experience, int level) : Character(name, health, attack, defense, speed, true, experience, level) {
-    experience = 75;
-    level = 4;
 }
-
 
 
 
@@ -26,9 +23,6 @@ void Player::doAttack(Character *target) {
     int rolledAttack = getRolledAttack(getAttack());
     int trueDamage = target->getDefense() > rolledAttack ? 0 : rolledAttack - target->getDefense();
     target->takeDamage(trueDamage);
-    if (target->getHealth()<=0){
-        cout << " > You have slain "<< target->getName()<<"!"<< endl;
-    }
 }
 
 void Player::takeDamage(int damage) {
@@ -40,20 +34,18 @@ void Player::takeDamage(int damage) {
     }
 }
 
-void Player::flee(vector<Enemy *> enemies) {
+void Player::flee(vector<Enemy*> enemies) {
     std::sort(enemies.begin(), enemies.end(), compareSpeed);
     Enemy *fastestEnemy = enemies[0];
     bool fleed = false;
     if (this->getSpeed() > fastestEnemy->getSpeed()) {
         fleed = true;
     }
-    else {
+    else{
         srand(time(NULL));
         int chance = rand() % 100;
         cout << " > chance: " << chance << endl;
-        if (fleed != chance > 99){
-            fleed = true;
-        }
+        fleed = chance > 99;
 
     }
 
@@ -71,9 +63,9 @@ Character* Player::getTarget(vector<Enemy *> enemies) {
     return enemies[targetIndex];
 }
 
-void Player::gainExperience(Enemy* enemy) {
-    if (enemy && enemy->health <=0){
-        experience+= enemy->experience;
+void Player::gainExperience(Enemy* enemy){
+    if (enemy && enemy -> health <= 0){
+        experience+= enemy ->experience;
         LevelUp();
     }
 }
@@ -83,10 +75,18 @@ void Player::LevelUp() {
         level++;
         experience-=100;
 
-        setHealth(getHealth() + 10);
-        setAttack(getAttack() + 5);
-        setDefense(getDefense() + 5);
-        setSpeed(getSpeed() + 5);
+        int healthGain = 10;
+        int attackGain = 5;
+        int defenseGain = 5;
+        health += healthGain;
+        attack += attackGain;
+        defense += defenseGain;
+
+        cout << "  You leveled up! -> " << level << "!" << endl;
+        cout << "  ---Your characteristics are improved--- " << endl;
+        cout << "  Attack: +" << 5 << endl;
+        cout << "  Defense: +" << 3 << endl;
+        cout << "  Speed: +" << 2 << endl;
     }
 
 }

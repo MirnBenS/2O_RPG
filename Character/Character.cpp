@@ -3,8 +3,9 @@
 //
 #include "Character.h"
 #include <cstring>
+#include <iostream>
 
-Character::Character(char* _name, int _health, int _attack, int _defense, int _speed, bool _isPlayer, int _experience, int _level) {
+Character::Character(char _name[30], int _health, int _attack, int _defense, int _speed, bool _isPlayer, int _experience, int _level) {
     strcpy(name,_name);
     health = _health;
     attack = _attack;
@@ -12,7 +13,7 @@ Character::Character(char* _name, int _health, int _attack, int _defense, int _s
     speed = _speed;
     isPlayer = _isPlayer;
     fleed = false;
-    experience =_experience;
+    experience = _experience;
     level= _level;
 }
 
@@ -57,7 +58,7 @@ int Character::getSpeed() {
 }
 
 string Character::toString() {
-    return "Name: " + string(name) + "\nHealth: " + to_string(health) + "\nAttack: " + to_string(attack) + "\nDefense: " + to_string(defense) + "\nSpeed: " + to_string(speed);
+    cout << "\nName: " << name << "\nHealth: " + to_string(health) + "\nAttack: " + to_string(attack) + "\nDefense: " + to_string(defense) + "\nSpeed: " + to_string(speed);
 }
 
 bool Character::getIsPlayer() {

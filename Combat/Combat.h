@@ -29,9 +29,9 @@ private:
     Character* getTarget(Character* target);
     void registerActions();
     void executeActions();
-
     void checkParticipantStatus(Character* participant);
     void checkForFlee(Character* character);
+
 
 public:
     Combat(vector<Character*> _participants);
@@ -40,6 +40,7 @@ public:
     void addParticipant(Character *participant);
     void doCombat();
     string participantsToString();
+    void increaseEnemyStatus(int score);
 };
 
 #endif //INC_2O_RPG_COMBAT_H

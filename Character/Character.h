@@ -4,20 +4,21 @@
 #ifndef INC_2O_RPG_CHARACTER_H
 #define INC_2O_RPG_CHARACTER_H
 #include <string>
-#include <vector>
 #include "../Combat/Action.h"
+#include <cstring>
+#include <vector>
 
 using namespace std;
 
 class Character {
-protected:
+public:
     char name[30];
     int attack;
     int defense;
     int speed;
     bool isPlayer;
     bool fleed;
-public:
+    int health;
     int experience;
     int level;
 
@@ -42,7 +43,7 @@ public:
     bool hasFleed();
     int getExperience();
     int getLevel();
-    int health;
+
 
 };
 

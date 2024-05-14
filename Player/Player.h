@@ -20,11 +20,6 @@ public:
     void doAttack(Character *target) override;
     void takeDamage(int damage) override;
 
-    /*char* serialize();
-    static const unsigned int BUFFER_SIZE = sizeof (name) + sizeof (health) + sizeof (attack) + sizeof (defense);
-    static Player* unserialize(vector<Enemy*> enemies);
-     */
-
     Character* getTarget(vector<Enemy*> enemies);
     void flee(vector<Enemy*> enemies);
     void LevelUp();
