@@ -55,7 +55,9 @@ void Combat::doCombat() {
         executeActions();
     }
     //WHO WIN?
-    if (enemies.size() == 0) {
+    if (enemies.size() != 0) {
+        cout << " The enemies have won the combat\n  --------Game Over--------" << endl;
+    } else {
         cout << "   You have won the combat!" << endl;
         cout << "   This match... I think I've learned something from this. You're nothing." << endl;
         for (Enemy *enemy: enemies) {
@@ -66,8 +68,7 @@ void Combat::doCombat() {
         for (Player *player: teamMembers) {
             cout << "  > " << player->getName() << " has won " << player->experience << " of experience." << endl;
         }
-    } else {
-        cout << " The enemies have won the combat\n  --------Game Over--------" << endl;
+
     }
 
     for (Player *player: teamMembers) {
@@ -75,20 +76,6 @@ void Combat::doCombat() {
         cout << "  Health: " <<player->health << endl;
         cout << "  Attack: " <<player->attack << endl;
         cout << "  Defense: " <<player->defense << endl;
-    }
-}
-
-void Combat::increaseEnemyStatus(int score) {
-    // DAR LOS PUNTOS A LOS ENEMIGOS
-    for (Enemy *enemy: enemies) {
-
-        // Aumentar atributos
-        int healthIncrease = score / 3;
-        int attackIncrease = score / 3;
-        int defenseIncrease = score - healthIncrease - attackIncrease;
-        enemy->health += healthIncrease;
-        enemy->attack += attackIncrease;
-        enemy->defense += defenseIncrease;
     }
 }
 
@@ -115,6 +102,7 @@ void Combat::executeActions() {
         currentAction.action();
         checkForFlee(currentAction.subscriber);
         if (currentAction.target!= nullptr){
+            grantExperience(currentAction.subscriber, (Enemy *)currentAction.target);
             checkParticipantStatus(currentAction.subscriber);
             checkParticipantStatus(currentAction.target);
             actions.pop();
@@ -140,10 +128,8 @@ void Combat::checkParticipantStatus(Character* participant) {
 }
 
 void Combat::checkForFlee(Character *character) {
-    if(character->getHealth()<=0) {
-        return;
-    }
     bool fleed = character->hasFleed();
+
     if (fleed){
         if (character->getIsPlayer()){
             cout<<"  You have fled the combat |COWARD|"<<endl;
@@ -165,4 +151,10 @@ string Combat::participantsToString() {
         result += participants[i]->toString() + "\n";
     }
     return result;
+}
+
+void Combat::grantExperience(Character *player, Enemy *enemy){
+    if (enemy -> getHealth() <= 0){
+        cout << "The enemy has " <<enemy->getExperience() << " experience"<< endl;
+    }
 }

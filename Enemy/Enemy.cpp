@@ -50,8 +50,8 @@ Action Enemy::takeAction(vector<Player *> player) {
     myAction.speed = getSpeed();
     myAction.subscriber = this;
 
-    Character *target = getTarget(std::move(player));
-    if (this->getHealth() < Max_Health * 0.2) {
+    Character *target = getTarget(player);
+    if (this->getHealth() < Max_Health &&rand() %100 < 100) {
         myAction.action = [this, target] {
             this->fleed = true;
         };

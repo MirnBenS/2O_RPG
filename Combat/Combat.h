@@ -40,7 +40,7 @@ public:
     void addParticipant(Character *participant);
     void doCombat();
     string participantsToString();
-    void increaseEnemyStatus(int score);
+    void grantExperience(Character *player, Enemy *enemy);
 };
 
 #endif //INC_2O_RPG_COMBAT_H

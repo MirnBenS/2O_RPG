@@ -7,9 +7,9 @@
 using namespace std;
 
 int main() {
-    Player *player = new Player("Luke", 35, 7, 2, 5,10,1);
-    Enemy *enemy = new Enemy("Jabba", 10, 5, 2, 7,10,1);
-    Enemy *enemy2 = new Enemy("Palpatine", 10, 5, 2, 7, 10,1);
+    Player *player = new Player("Luke", 50, 7, 2, 5,10,1);
+    Enemy *enemy = new Enemy("Jabba", 15, 9, 2, 7,10,1);
+    Enemy *enemy2 = new Enemy("Palpatine", 5, 5, 2, 7, 10,1);
 
     vector<Character*> participants;
     participants.push_back(player);

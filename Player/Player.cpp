@@ -45,7 +45,7 @@ void Player::flee(vector<Enemy*> enemies) { //SE ESCAPA SIEMPRE
         srand(time(NULL));
         int chance = rand() % 100;
         cout << " > chance: " << chance << endl;
-        if (fleed = chance > 99){
+        if (fleed = chance > 90){
             fleed = true;
         }
         else{
@@ -66,13 +66,6 @@ Character* Player::getTarget(vector<Enemy *> enemies) {
     }
     cin >> targetIndex;
     return enemies[targetIndex];
-}
-
-void Player::gainExperience(Enemy* enemy){
-    if (enemy && enemy -> health <= 0){
-        experience+= enemy ->experience;
-        LevelUp();
-    }
 }
 
 void Player::LevelUp() {

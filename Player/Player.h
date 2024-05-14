@@ -23,7 +23,6 @@ public:
     Character* getTarget(vector<Enemy*> enemies);
     void flee(vector<Enemy*> enemies);
     void LevelUp();
-    void gainExperience(Enemy* enemy);
 
     Action takeAction(vector<Enemy*> enemies);
 
